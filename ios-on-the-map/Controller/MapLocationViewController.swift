@@ -14,12 +14,19 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    var json: NSArray!
+    
     
     override func viewDidLoad() {
         
       super.viewDidLoad()
 
        getStudentLocation()
+       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
     }
     
     private func getStudentLocation(){
@@ -45,14 +52,13 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
             }
             
           
-            guard let json : NSArray = parsedResult?["results"] as! NSArray  else{
-                print("Nenhum resultado retornado")
+            if let json : NSArray = parsedResult?["results"] as! NSArray {
                 
-                return
+                self.json = json
+                self.populateMapAndList(json: self.json)
+            } else{
+               print("Nenhum resultado retornado")
             }
-            
-            self.pupulateMapAndList(json: json)
-            
             
         }
         task.resume()
@@ -60,15 +66,9 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
     }
     
     
-    private func pupulateMapAndList(json: NSArray){
+    private func populateMapAndList(json: NSArray){
 
-        // We will create an MKPointAnnotation for each dictionary in "locations". The
-        // point annotations will be stored in this array, and then provided to the map view.
         var annotations = [MKPointAnnotation]()
-
-        // The "locations" array is loaded with the sample data below. We are using the dictionaries
-        // to create map annotations. This would be more stylish if the dictionaries were being
-        // used to create custom structs. Perhaps StudentLocation structs.
 
         for dictionary  in json {
             
@@ -82,21 +82,20 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
                 
                 let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
             
-                
                 annotation.coordinate = coordinate
                 annotation.title = "\(first) \(last)"
                 annotation.subtitle = mediaURL
             
                 annotations.append(annotation)
-            
                 
                 print("\(first) \(last)")
             }
            
         }
 
-        // When the array is complete, we add the annotations to the map.
         self.mapView.addAnnotations(annotations)
+        
+       
 
     }
     
@@ -119,15 +118,21 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
         return pinView
     }
     
-    
-    // This delegate method is implemented to respond to taps. It opens the system browser
-    // to the URL specified in the annotationViews subtitle property.
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
                 app.openURL(URL(string: toOpen)!)
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "editSegue"{
+            let controller = segue.destination as! StudentsTableViewController
+            controller.jsonResults = json
+            
         }
     }
     
