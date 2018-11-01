@@ -15,6 +15,8 @@
 		0B183ACC218790A00013C114 /* MapLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183ACB218790A00013C114 /* MapLocationViewController.swift */; };
 		0B183ACE2189D5930013C114 /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183ACD2189D5930013C114 /* StudentsTableViewController.swift */; };
 		0B183AD4218B21460013C114 /* NewLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183AD3218B21460013C114 /* NewLocationViewController.swift */; };
+		0B183AD7218B50A20013C114 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183AD6218B50A20013C114 /* Constants.swift */; };
+		0B183AD9218B5F170013C114 /* NewStudentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183AD8218B5F170013C114 /* NewStudentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		0B183ACB218790A00013C114 /* MapLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationViewController.swift; sourceTree = "<group>"; };
 		0B183ACD2189D5930013C114 /* StudentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
 		0B183AD3218B21460013C114 /* NewLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocationViewController.swift; sourceTree = "<group>"; };
+		0B183AD6218B50A20013C114 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0B183AD8218B5F170013C114 /* NewStudentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStudentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 		0B183A9A2187312A0013C114 /* ios-on-the-map */ = {
 			isa = PBXGroup;
 			children = (
+				0B183AD5218B50480013C114 /* Model */,
 				0B183AD0218A7CE10013C114 /* View */,
 				0B183ACF2189F0B40013C114 /* Controller */,
 				0B183A9B2187312A0013C114 /* AppDelegate.swift */,
@@ -85,8 +90,17 @@
 		0B183AD0218A7CE10013C114 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0B183AD8218B5F170013C114 /* NewStudentView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0B183AD5218B50480013C114 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B183AD6218B50A20013C114 /* Constants.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +178,8 @@
 				0B183ACC218790A00013C114 /* MapLocationViewController.swift in Sources */,
 				0B183ACE2189D5930013C114 /* StudentsTableViewController.swift in Sources */,
 				0B183AD4218B21460013C114 /* NewLocationViewController.swift in Sources */,
+				0B183AD7218B50A20013C114 /* Constants.swift in Sources */,
+				0B183AD9218B5F170013C114 /* NewStudentView.swift in Sources */,
 				0B183A9C2187312A0013C114 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

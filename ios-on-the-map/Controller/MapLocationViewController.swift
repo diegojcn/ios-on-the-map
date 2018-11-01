@@ -31,6 +31,7 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
         let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             if error != nil { // Handle error...
@@ -46,12 +47,16 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
                 print(error)
                 return
             }
-            
           
             if let json : NSArray = parsedResult?["results"] as! NSArray {
                 
                 self.json = json
                 self.populateMapAndList(json: self.json)
+                
+                let extractedExpr : StudentsTableViewController = navigationController?.pushViewController(StudentsTableViewController, animated: false)
+                
+                
+                
             } else{
                print("Nenhum resultado retornado")
             }
@@ -120,15 +125,6 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
             }
         }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        
-//        if segue.identifier == "editSegue"{
-//            let controller = segue.destination as! StudentsTableViewController
-//            controller.jsonResults = json
-//            
-//        }
-//    }
     
 }
 

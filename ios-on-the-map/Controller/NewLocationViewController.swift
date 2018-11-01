@@ -12,15 +12,7 @@ import MapKit
 
 class NewLocationViewController: UIViewController{
     
-    @IBOutlet weak var nameTxt: UITextField!
-    
-    @IBOutlet weak var lastNameTxt: UITextField!
-    
-    @IBOutlet weak var linkTxt: UITextField!
-    
-    @IBOutlet weak var locationTxt: UITextField!
-    
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var newStudentView: NewStudentView!
     
     override func viewWillAppear(_ animated: Bool) {
        subscribeToKeyboardNotifications()
@@ -56,7 +48,7 @@ class NewLocationViewController: UIViewController{
     @IBAction func findInTheMap(_ sender: UIButton) {
         
         var localSearchRequest : MKLocalSearch.Request = MKLocalSearch.Request()
-        localSearchRequest.naturalLanguageQuery = locationTxt.text
+        localSearchRequest.naturalLanguageQuery = newStudentView.locationTxt.text
        var localSearch : MKLocalSearch = MKLocalSearch(request: localSearchRequest)
         localSearch.start { (localSearchResponse, error) -> Void in
             
@@ -68,14 +60,14 @@ class NewLocationViewController: UIViewController{
             }
             //3
             var pointAnnotation : MKPointAnnotation = MKPointAnnotation()
-            pointAnnotation.title = self.locationTxt.text
+            pointAnnotation.title = self.newStudentView.locationTxt.text
             pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse!.boundingRegion.center.latitude, longitude:     localSearchResponse!.boundingRegion.center.longitude)
             
             
             var pinAnnotationView : MKPinAnnotationView = MKPinAnnotationView(annotation: pointAnnotation, reuseIdentifier: nil)
-            self.mapView.centerCoordinate = pointAnnotation.coordinate
-            self.mapView.removeAnnotations(self.mapView.annotations)
-            self.mapView.addAnnotation(pinAnnotationView.annotation!)
+            self.newStudentView.mapView.centerCoordinate = pointAnnotation.coordinate
+            self.newStudentView.mapView.removeAnnotations(self.newStudentView.mapView.annotations)
+            self.newStudentView.mapView.addAnnotation(pinAnnotationView.annotation!)
         
         
         
@@ -83,33 +75,15 @@ class NewLocationViewController: UIViewController{
     }
     
     @objc func keyboardChange(_ notification:Notification) {
-//        view.frame.origin.y = 0
-//        if(notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification ){
-//
-//            view.frame.origin.y -= getKeyboardHeight(notification)
-            let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(self.hideKeyboard))
+        
+        if(notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification ){
+
+            let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self.newStudentView, action: #selector(self.newStudentView.hideKeyboard))
             tapGesture.cancelsTouchesInView = false
             
             self.view.addGestureRecognizer(tapGesture)
-            
-//        }else {
-//            view.frame.origin.y = 0
-//        }
-    }
-    
-    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
+        }
         
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-        return keyboardSize.cgRectValue.height/2
     }
-    
-    @objc func hideKeyboard()
-    {
-        self.nameTxt.resignFirstResponder()
-        self.lastNameTxt.resignFirstResponder()
-        self.linkTxt.resignFirstResponder()
-    }
-    
-    
+
 }

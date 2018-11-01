@@ -13,8 +13,6 @@ class StudentsTableViewController : UITableViewController{
     
     var jsonResults : NSArray?
     
-    @IBOutlet weak var nameTld : UITextField?
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

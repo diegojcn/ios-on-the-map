@@ -190,7 +190,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kk2-M4-Asf">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kk2-M4-Asf" customClass="NewStudentView" customModule="ios_on_the_map" customModuleProvider="target">
                                 <rect key="frame" x="20" y="20" width="374" height="716"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="A1q-Ew-KO1">
@@ -276,6 +276,13 @@
                                     <constraint firstItem="A1q-Ew-KO1" firstAttribute="width" secondItem="Kk2-M4-Asf" secondAttribute="width" id="usr-4E-Vdo"/>
                                     <constraint firstItem="Thq-dU-Giq" firstAttribute="top" secondItem="A1q-Ew-KO1" secondAttribute="bottom" constant="8" symbolic="YES" id="zVc-gF-gEY"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="lastNameTxt" destination="H4J-UI-tpu" id="hih-gc-lIb"/>
+                                    <outlet property="linkTxt" destination="gaI-Yd-Rnc" id="D1X-ot-eS9"/>
+                                    <outlet property="locationTxt" destination="Fug-H4-LOB" id="PSH-Wr-l9j"/>
+                                    <outlet property="mapView" destination="Thq-dU-Giq" id="Che-9z-dq4"/>
+                                    <outlet property="nameTxt" destination="9wC-sO-hqT" id="XEg-6j-L9O"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -290,11 +297,7 @@
                         <viewLayoutGuide key="safeArea" id="d51-2g-THK"/>
                     </view>
                     <connections>
-                        <outlet property="lastNameTxt" destination="H4J-UI-tpu" id="Nw1-sx-Ccw"/>
-                        <outlet property="linkTxt" destination="gaI-Yd-Rnc" id="Ael-0Y-I5O"/>
-                        <outlet property="locationTxt" destination="Fug-H4-LOB" id="0lZ-Ej-xEo"/>
-                        <outlet property="mapView" destination="Thq-dU-Giq" id="q7S-DI-3Px"/>
-                        <outlet property="nameTxt" destination="9wC-sO-hqT" id="PIw-YM-kde"/>
+                        <outlet property="newStudentView" destination="Kk2-M4-Asf" id="aAV-ib-x2M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nGj-a8-bBl" userLabel="First Responder" sceneMemberID="firstResponder"/>
