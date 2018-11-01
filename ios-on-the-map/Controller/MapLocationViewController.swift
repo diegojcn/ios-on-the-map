@@ -25,10 +25,6 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
-    }
-    
     private func getStudentLocation(){
         
         
@@ -95,8 +91,6 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
 
         self.mapView.addAnnotations(annotations)
         
-       
-
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -108,7 +102,7 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.pinColor = .red
+            pinView!.pinTintColor = .red
             pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         else {
@@ -127,14 +121,14 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "editSegue"{
-            let controller = segue.destination as! StudentsTableViewController
-            controller.jsonResults = json
-            
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//        if segue.identifier == "editSegue"{
+//            let controller = segue.destination as! StudentsTableViewController
+//            controller.jsonResults = json
+//            
+//        }
+//    }
     
 }
 

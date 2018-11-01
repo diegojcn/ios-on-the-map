@@ -13,6 +13,8 @@ class StudentsTableViewController : UITableViewController{
     
     var jsonResults : NSArray?
     
+    @IBOutlet weak var nameTld : UITextField?
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -37,6 +39,7 @@ class StudentsTableViewController : UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
          return jsonResults?.count ?? 0
     }
     

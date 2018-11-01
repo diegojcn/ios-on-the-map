@@ -14,6 +14,7 @@
 		0B183AA62187312C0013C114 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B183AA42187312C0013C114 /* LaunchScreen.storyboard */; };
 		0B183ACC218790A00013C114 /* MapLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183ACB218790A00013C114 /* MapLocationViewController.swift */; };
 		0B183ACE2189D5930013C114 /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183ACD2189D5930013C114 /* StudentsTableViewController.swift */; };
+		0B183AD4218B21460013C114 /* NewLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183AD3218B21460013C114 /* NewLocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		0B183AA72187312C0013C114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B183ACB218790A00013C114 /* MapLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationViewController.swift; sourceTree = "<group>"; };
 		0B183ACD2189D5930013C114 /* StudentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
+		0B183AD3218B21460013C114 /* NewLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				0B183A9D2187312A0013C114 /* LoginViewController.swift */,
 				0B183ACB218790A00013C114 /* MapLocationViewController.swift */,
 				0B183ACD2189D5930013C114 /* StudentsTableViewController.swift */,
+				0B183AD3218B21460013C114 /* NewLocationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				0B183A9E2187312A0013C114 /* LoginViewController.swift in Sources */,
 				0B183ACC218790A00013C114 /* MapLocationViewController.swift in Sources */,
 				0B183ACE2189D5930013C114 /* StudentsTableViewController.swift in Sources */,
+				0B183AD4218B21460013C114 /* NewLocationViewController.swift in Sources */,
 				0B183A9C2187312A0013C114 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
