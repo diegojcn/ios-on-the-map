@@ -53,7 +53,7 @@ class MapLocationViewController : UIViewController, MKMapViewDelegate {
                 self.json = json
                 self.populateMapAndList(json: self.json)
                 
-                let extractedExpr : StudentsTableViewController = navigationController?.pushViewController(StudentsTableViewController, animated: false)
+        
                 
                 
                 
