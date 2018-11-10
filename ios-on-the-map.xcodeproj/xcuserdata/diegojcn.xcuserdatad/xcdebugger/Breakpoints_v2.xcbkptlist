@@ -70,49 +70,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ios-on-the-map/Controller/MapLocationViewController.swift"
-            timestampString = "562799215.1022871"
+            filePath = "ios-on-the-map/Model/Constants.swift"
+            timestampString = "562844856.0811729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "getStudentLocation()"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "getURL(method:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ios_on_the_map.MapLocationViewController.(getStudentLocation in _A1EEABA5C0CE16CB0B2B632661F9480D)() -&gt; ()"
-                  moduleName = "ios-on-the-map"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/diegojcn/Documents/github/ios-on-the-map/ios-on-the-map/Controller/MapLocationViewController.swift"
-                  timestampString = "562765114.21907"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "664">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ios_on_the_map.MapLocationViewController.(getStudentLocation in _A1EEABA5C0CE16CB0B2B632661F9480D)() -&gt; ()"
-                  moduleName = "ios-on-the-map"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/diegojcn/Documents/github/ios-on-the-map/ios-on-the-map/Controller/MapLocationViewController.swift"
-                  timestampString = "562765114.220953"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "1548">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -121,13 +89,77 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ios-on-the-map/Model/Constants.swift"
-            timestampString = "562799215.102387"
+            filePath = "ios-on-the-map/Controller/NewLocationViewController.swift"
+            timestampString = "563570119.317065"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "getURL(method:)"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "saveAndPinNewLocation(newStudentView:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ios-on-the-map/Controller/NewLocationViewController.swift"
+            timestampString = "563570119.317167"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "saveAndPinNewLocation(newStudentView:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ios-on-the-map/Controller/NewLocationViewController.swift"
+            timestampString = "563570119.317243"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "saveAndPinNewLocation(newStudentView:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ios-on-the-map/Controller/NewLocationViewController.swift"
+            timestampString = "563570119.3173"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "saveAndPinNewLocation(newStudentView:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ios-on-the-map/Controller/StudentsTableViewController.swift"
+            timestampString = "563570119.317362"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

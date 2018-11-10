@@ -9,28 +9,28 @@
 import Foundation
 import UIKit
 
-class StudentsTableViewController : UITableViewController{
+class StudentsTableViewController : UITableViewController {
     
-    var jsonResults : NSArray?
+    public var json : NSArray?
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell")
-        let student = jsonResults?[indexPath.item] as! [String : Any]
+        let student = json?[indexPath.item] as! [String : Any]
         
-        let first = student["firstName"] as? String
-        let last = student["lastName"] as? String
-        let mediaURL = student["mediaURL"]  as? String
-    
-        cell?.textLabel?.text = "\(first) \(last)"
-        cell?.imageView?.image = nil
+        if let first = student["firstName"] as? String,
+            let last = student["lastName"] as? String,
+            let mediaURL = student["mediaURL"]  as? String {
+            
+             cell?.textLabel?.text = "\(first) \(last)"
+            
+        }
         
         return cell!
         
@@ -38,7 +38,7 @@ class StudentsTableViewController : UITableViewController{
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-         return jsonResults?.count ?? 0
+         return json?.count ?? 0
     }
     
 }

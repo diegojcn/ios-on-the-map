@@ -23,6 +23,8 @@ class NewStudentView : UIView {
     
     @IBOutlet weak var mapView : MKMapView!
     
+    var locationCoordinate: CLLocationCoordinate2D?
+    
    
     @objc func hideKeyboard()
     {

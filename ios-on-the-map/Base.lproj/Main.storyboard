@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FvB-5m-br3">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FvB-5m-br3" customClass="LoginView" customModule="ios_on_the_map" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nog-uF-kqu">
@@ -42,6 +42,7 @@
                                                     <color key="titleColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z91-TH-9G5"/>
                                                     <segue destination="9Ij-P9-VD9" kind="presentation" id="VTd-Rw-C6p"/>
                                                 </connections>
                                             </button>
@@ -68,6 +69,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="loginView" destination="FvB-5m-br3" id="ZTP-9X-JJs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -140,7 +144,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="nRR-np-RFs">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableViewCell" id="nRR-np-RFs">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nRR-np-RFs" id="Bcp-J7-bz5">
@@ -156,7 +160,11 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="" image="icon_mapview-deselected" selectedImage="icon_listview-selected" id="bc8-K8-dGf"/>
                     <navigationItem key="navigationItem" title="On the Map" id="7Ox-dQ-aJ6">
-                        <barButtonItem key="leftBarButtonItem" image="icon_pin" id="V5U-8J-5ed"/>
+                        <barButtonItem key="leftBarButtonItem" image="icon_pin" id="V5U-8J-5ed">
+                            <connections>
+                                <segue destination="beg-J3-N2d" kind="presentation" id="hAl-0H-4nR"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="icon_refresh" id="YuG-Vo-q1X"/>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -169,7 +177,7 @@
         <scene sceneID="eFE-WE-DOI">
             <objects>
                 <navigationController id="4KJ-yy-bKx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="icon_listview-deselected" selectedImage="icon_listview-selected" id="QXI-MW-ovH"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="" image="icon_listview-deselected" selectedImage="icon_listview-selected" id="QXI-MW-ovH"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kb2-cT-sHK">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -251,6 +259,9 @@
                                                 <state key="normal" title="Save">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="saveNewLocation:" destination="beg-J3-N2d" eventType="touchUpInside" id="AXp-qW-LHt"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEt-Xs-M4s">
                                                 <rect key="frame" x="192" y="0.0" width="182" height="54"/>
@@ -258,6 +269,9 @@
                                                 <state key="normal" title="Back">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="9Ij-P9-VD9" kind="show" identifier="" id="Ngs-Nw-S08"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -304,10 +318,10 @@
             </objects>
             <point key="canvasLocation" x="4000.0000000000005" y="112.50000000000001"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="YNr-FF-OdB">
             <objects>
-                <tabBarController id="9Ij-P9-VD9" sceneMemberID="viewController">
+                <tabBarController id="9Ij-P9-VD9" customClass="TabBarViewController" customModule="ios_on_the_map" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Oo5-kb-ahh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -331,4 +345,8 @@
         <image name="icon_pin" width="24" height="24"/>
         <image name="icon_refresh" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="VTd-Rw-C6p"/>
+        <segue reference="hAl-0H-4nR"/>
+    </inferredMetricsTieBreakers>
 </document>

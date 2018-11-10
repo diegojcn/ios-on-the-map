@@ -17,6 +17,9 @@
 		0B183AD4218B21460013C114 /* NewLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183AD3218B21460013C114 /* NewLocationViewController.swift */; };
 		0B183AD7218B50A20013C114 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183AD6218B50A20013C114 /* Constants.swift */; };
 		0B183AD9218B5F170013C114 /* NewStudentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183AD8218B5F170013C114 /* NewStudentView.swift */; };
+		0B183ADB218D22900013C114 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183ADA218D22900013C114 /* User.swift */; };
+		0B183ADD218D2A5A0013C114 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183ADC218D2A5A0013C114 /* LoginView.swift */; };
+		0B78D868219507CA00BB4DC6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B78D867219507CA00BB4DC6 /* TabBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		0B183AD3218B21460013C114 /* NewLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocationViewController.swift; sourceTree = "<group>"; };
 		0B183AD6218B50A20013C114 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0B183AD8218B5F170013C114 /* NewStudentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStudentView.swift; sourceTree = "<group>"; };
+		0B183ADA218D22900013C114 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0B183ADC218D2A5A0013C114 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		0B78D867219507CA00BB4DC6 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +89,7 @@
 				0B183ACB218790A00013C114 /* MapLocationViewController.swift */,
 				0B183ACD2189D5930013C114 /* StudentsTableViewController.swift */,
 				0B183AD3218B21460013C114 /* NewLocationViewController.swift */,
+				0B78D867219507CA00BB4DC6 /* TabBarViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -91,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				0B183AD8218B5F170013C114 /* NewStudentView.swift */,
+				0B183ADC218D2A5A0013C114 /* LoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -99,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				0B183AD6218B50A20013C114 /* Constants.swift */,
+				0B183ADA218D22900013C114 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,9 +186,12 @@
 				0B183A9E2187312A0013C114 /* LoginViewController.swift in Sources */,
 				0B183ACC218790A00013C114 /* MapLocationViewController.swift in Sources */,
 				0B183ACE2189D5930013C114 /* StudentsTableViewController.swift in Sources */,
+				0B183ADD218D2A5A0013C114 /* LoginView.swift in Sources */,
 				0B183AD4218B21460013C114 /* NewLocationViewController.swift in Sources */,
+				0B183ADB218D22900013C114 /* User.swift in Sources */,
 				0B183AD7218B50A20013C114 /* Constants.swift in Sources */,
 				0B183AD9218B5F170013C114 /* NewStudentView.swift in Sources */,
+				0B78D868219507CA00BB4DC6 /* TabBarViewController.swift in Sources */,
 				0B183A9C2187312A0013C114 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
