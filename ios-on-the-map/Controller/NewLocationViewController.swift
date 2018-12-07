@@ -91,9 +91,6 @@ class NewLocationViewController: UIViewController{
         
     }
     
-//    {"uniqueKey": "22547", "firstName": "test", "lastName": "Diego", "mapString": "Belo Horizonte ", "mediaURL": "www.google.com", "latitude": -19.918754958181516, "longitude": -43.95982245448977}
-//    {"objectId":"Fddvc49Cxo","createdAt":"2018-11-02T09:49:37.016Z"}
-    
     func saveAndPinNewLocation(newStudentView: NewStudentView){
         
         let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
@@ -107,12 +104,8 @@ class NewLocationViewController: UIViewController{
             print("Erro")
             return
         }
-        // 22547
         let uniqueKey = Int(arc4random_uniform(UInt32(99999)))
-        
         let body = "{\"uniqueKey\": \"\(uniqueKey)\", \"firstName\": \"\(firstName)\", \"lastName\": \"\(lastName)\", \"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\", \"latitude\": \(latitude), \"longitude\": \(longitude)}"
-        
-        print(body)
         
         request.httpBody = body.data(using: String.Encoding.utf8)
     
@@ -122,7 +115,6 @@ class NewLocationViewController: UIViewController{
                 return
             }
             print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)
-            
             
             let parsedResult: [String:AnyObject]!
             do {

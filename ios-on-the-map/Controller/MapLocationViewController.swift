@@ -58,7 +58,6 @@ class MapLocationViewController : UIViewController {
             
                 annotations.append(annotation)
                 
-                print("\(first) \(last)")
             }
            
         }

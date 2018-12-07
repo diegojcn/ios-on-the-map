@@ -19,15 +19,32 @@ class LoginViewController: UIViewController {
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"udacity\": {\"username\": \"\(user.name)\", \"password\": \"********\"}}".data(using: String.Encoding.utf8)
+        request.httpBody = "{\"udacity\": {\"username\": \"\(user.name)\", \"password\": \"\(user.password)\"}}".data(using: String.Encoding.utf8)
         let session = URLSession.shared
+        
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            if error != nil { // Handle error…
-                return
+            
+            func displayError(_ error: String) {
+                print(error)
             }
+            print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)
             let range = Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
-            print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
+            
+           
+            let parsedResult: [String:AnyObject]!
+            do {
+                parsedResult = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments) as? [String:AnyObject]
+           
+                performUIUpdatesOnMain {
+                    self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                }
+            
+            } catch {
+                print("Could not parse the data as JSON: '\(String(describing: data))'")
+                return
+            }
+    
         }
         task.resume()
         
@@ -36,16 +53,15 @@ class LoginViewController: UIViewController {
     
     @IBAction func login(_ sender: UIButton) {
         
-        
+        if let user = loginView.userTextField.text, let pass = loginView.passTextField.text {
+            
+            let user : User = User (name: user, lastName: "", password : pass)
+//            autenticate(user: user)
+            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            
+        }
         
     }
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-
 }
 

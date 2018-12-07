@@ -20,6 +20,7 @@
 		0B183ADB218D22900013C114 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183ADA218D22900013C114 /* User.swift */; };
 		0B183ADD218D2A5A0013C114 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183ADC218D2A5A0013C114 /* LoginView.swift */; };
 		0B78D868219507CA00BB4DC6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B78D867219507CA00BB4DC6 /* TabBarViewController.swift */; };
+		0B78D87421B9A22200BB4DC6 /* GCDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B78D87321B9A22200BB4DC6 /* GCDUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		0B183ADA218D22900013C114 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0B183ADC218D2A5A0013C114 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0B78D867219507CA00BB4DC6 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		0B78D87321B9A22200BB4DC6 /* GCDUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		0B183A9A2187312A0013C114 /* ios-on-the-map */ = {
 			isa = PBXGroup;
 			children = (
+				0B78D87521B9A28000BB4DC6 /* Utils */,
 				0B183AD5218B50480013C114 /* Model */,
 				0B183AD0218A7CE10013C114 /* View */,
 				0B183ACF2189F0B40013C114 /* Controller */,
@@ -110,6 +113,14 @@
 				0B183ADA218D22900013C114 /* User.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0B78D87521B9A28000BB4DC6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0B78D87321B9A22200BB4DC6 /* GCDUtils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +198,7 @@
 				0B183ACC218790A00013C114 /* MapLocationViewController.swift in Sources */,
 				0B183ACE2189D5930013C114 /* StudentsTableViewController.swift in Sources */,
 				0B183ADD218D2A5A0013C114 /* LoginView.swift in Sources */,
+				0B78D87421B9A22200BB4DC6 /* GCDUtils.swift in Sources */,
 				0B183AD4218B21460013C114 /* NewLocationViewController.swift in Sources */,
 				0B183ADB218D22900013C114 /* User.swift in Sources */,
 				0B183AD7218B50A20013C114 /* Constants.swift in Sources */,
