@@ -47,11 +47,18 @@ class NewLocationViewController: UIViewController{
     
     @IBAction func saveNewLocation(_ sender: UIButton) {
         
-        saveAndPinNewLocation(newStudentView: self.newStudentView)
+       saveAndPinNewLocation(newStudentView: self.newStudentView)
+        
+        performSegue(withIdentifier: "back", sender: nil)
+        
+        
     }
     
     
     @IBAction func findInTheMap(_ sender: UIButton) {
+        
+        let alert = displayLoading(customMessage: "Finding location ...")
+         present(alert, animated: true)
         
         var localSearchRequest : MKLocalSearch.Request = MKLocalSearch.Request()
         localSearchRequest.naturalLanguageQuery = newStudentView.locationTxt.text
@@ -72,8 +79,12 @@ class NewLocationViewController: UIViewController{
             
             var pinAnnotationView : MKPinAnnotationView = MKPinAnnotationView(annotation: pointAnnotation, reuseIdentifier: nil)
             self.newStudentView.mapView.centerCoordinate = pointAnnotation.coordinate
-            self.newStudentView.mapView.removeAnnotations(self.newStudentView.mapView.annotations)
-            self.newStudentView.mapView.addAnnotation(pinAnnotationView.annotation!)
+        self.newStudentView.mapView.removeAnnotations(self.newStudentView.mapView.annotations)
+        self.newStudentView.mapView.addAnnotation(pinAnnotationView.annotation!)
+            
+            performUIUpdatesOnMain {
+                self.dismiss(animated: true, completion: nil)
+            }
            
 
         }

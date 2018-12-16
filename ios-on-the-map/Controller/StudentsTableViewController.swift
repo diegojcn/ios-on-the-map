@@ -14,9 +14,12 @@ class StudentsTableViewController : UITableViewController {
     public var json : NSArray?
     
     
+    public func reloadTableView(){
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

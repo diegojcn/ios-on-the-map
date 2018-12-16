@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B0AD5B921C45F0900A11B94 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0AD5B821C45F0900A11B94 /* ViewUtils.swift */; };
 		0B183A9C2187312A0013C114 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183A9B2187312A0013C114 /* AppDelegate.swift */; };
 		0B183A9E2187312A0013C114 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B183A9D2187312A0013C114 /* LoginViewController.swift */; };
 		0B183AA12187312A0013C114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B183A9F2187312A0013C114 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B0AD5B821C45F0900A11B94 /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		0B183A982187312A0013C114 /* ios-on-the-map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-on-the-map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B183A9B2187312A0013C114 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B183A9D2187312A0013C114 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				0B78D87321B9A22200BB4DC6 /* GCDUtils.swift */,
+				0B0AD5B821C45F0900A11B94 /* ViewUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			files = (
 				0B183A9E2187312A0013C114 /* LoginViewController.swift in Sources */,
 				0B183ACC218790A00013C114 /* MapLocationViewController.swift in Sources */,
+				0B0AD5B921C45F0900A11B94 /* ViewUtils.swift in Sources */,
 				0B183ACE2189D5930013C114 /* StudentsTableViewController.swift in Sources */,
 				0B183ADD218D2A5A0013C114 /* LoginView.swift in Sources */,
 				0B78D87421B9A22200BB4DC6 /* GCDUtils.swift in Sources */,

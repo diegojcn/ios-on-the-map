@@ -14,14 +14,15 @@ class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         self.searchAllStudentsLocation()
         
-       
-        
-        print("viewDidLoad TabBarViewController")
     }
+    
+    @IBAction func refreshLocations(_ sender: Any) {
+    
+        searchAllStudentsLocation()
+    }
+    
     
     private func searchAllStudentsLocation(){
         
@@ -35,7 +36,6 @@ class TabBarViewController: UITabBarController {
             if error != nil { // Handle error...
                 return
             }
-            
             
             let parsedResult: [String:AnyObject]!
             do {
@@ -57,8 +57,10 @@ class TabBarViewController: UITabBarController {
                     
                     map.json = json
                     std.json = json
-                    map.viewDidLoad()
-                    std.viewDidLoad()
+                    performUIUpdatesOnMain {
+                        map.populateMap(json: json)
+                        std.reloadTableView()
+                    }
                     
                 }
                 
@@ -74,14 +76,6 @@ class TabBarViewController: UITabBarController {
         
     }
     
-    override func tabBar(_ tabBar: UITabBar, willBeginCustomizing items: [UITabBarItem]) {
-        print("willBeginCustomizing")
-    }
-    
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
-
-    }
     
 }
 

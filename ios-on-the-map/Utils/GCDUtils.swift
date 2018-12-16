@@ -14,3 +14,7 @@ func performUIUpdatesOnMain(_ updates: @escaping () -> Void) {
         updates()
     }
 }
+
+func displayError(_ error: String) {
+    print(error)
+}

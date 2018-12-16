@@ -15,7 +15,7 @@ class LoginViewController: UIViewController {
     
     public func autenticate(user: User){
         
-        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        let request = NSMutableURLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -24,24 +24,41 @@ class LoginViewController: UIViewController {
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
-            func displayError(_ error: String) {
-                print(error)
-            }
-            print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)
             let range = Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
             
            
-            let parsedResult: [String:AnyObject]!
             do {
-                parsedResult = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments) as? [String:AnyObject]
-           
-                performUIUpdatesOnMain {
-                    self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                guard let parsedResult: [String:AnyObject] = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments) as? [String:AnyObject] else {
+                    performUIUpdatesOnMain {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    return
                 }
+                
+                guard let dictionarySession = parsedResult["session"] else {
+                    performUIUpdatesOnMain {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    return
+                }
+                
+                guard let userId : String = dictionarySession["id"] as! String else {
+                    performUIUpdatesOnMain {
+                       self.dismiss(animated: true, completion: nil)
+                    }
+                    return
+                }
+                
+                
+                self.getUser(id: userId)
+                
             
             } catch {
                 print("Could not parse the data as JSON: '\(String(describing: data))'")
+                performUIUpdatesOnMain {
+                    self.dismiss(animated: true, completion: nil)
+                }
                 return
             }
     
@@ -50,14 +67,68 @@ class LoginViewController: UIViewController {
         
     }
     
+    private func getUser(id : String){
+        
+        let request = NSMutableURLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/users/\(id)")!)
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            
+            let range = Range(5..<data!.count)
+            let newData = data?.subdata(in: range) /* subset response data! */
+            
+            
+            do {
+                guard let parsedResult: [String:AnyObject] = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments) as? [String:AnyObject] else {
+                    performUIUpdatesOnMain {
+                       self.dismiss(animated: true, completion: nil)
+                    }
+                    return
+                }
+                
+                guard let name = parsedResult["first_name"] as? String, let lastName = parsedResult["last_name"] as? String else {
+                    performUIUpdatesOnMain {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    return
+                }
+                
+                let user : User = User (name: name, lastName: lastName, password : "")
+                performUIUpdatesOnMain {
+                    
+                    self.dismiss(animated: true, completion: {
+                        self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                    })
+                    
+                    
+                }
+                
+                
+            } catch {
+                print("Could not parse the data as JSON: '\(String(describing: data))'")
+                performUIUpdatesOnMain {
+                    self.dismiss(animated: true, completion: nil)
+                }
+                return
+            }
+            
+        }
+        task.resume()
+        
+    }
+    
     
     @IBAction func login(_ sender: UIButton) {
+        
+       
+        let alert = displayLoading(customMessage: "Please Wait")
+        present(alert, animated: true)
         
         if let user = loginView.userTextField.text, let pass = loginView.passTextField.text {
             
             let user : User = User (name: user, lastName: "", password : pass)
-//            autenticate(user: user)
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            autenticate(user: user)
+        
             
         }
         

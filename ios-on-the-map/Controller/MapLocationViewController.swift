@@ -21,7 +21,6 @@ class MapLocationViewController : UIViewController {
         
       super.viewDidLoad()
         
-        print("viewDidLoad MapLocationViewController")
         if let jsonWrap = self.json {
             
             populateMap(json: jsonWrap)
@@ -30,13 +29,7 @@ class MapLocationViewController : UIViewController {
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear MapLocationViewController")
-        
-    }
-    
-    
-    private func populateMap(json: NSArray){
+    public func populateMap(json: NSArray){
 
         var annotations = [MKPointAnnotation]()
 
