@@ -10,72 +10,80 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     
-    var json : NSArray = []
-
+    var students : [Student]?
+    
+    var udacityService : UdacityService!
+    
+    var userLogedIn : User!
+    
+    var map : MapLocationViewController?
+    
+    var std : StudentsTableViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.searchAllStudentsLocation()
+        searchAllStudentsLocation()
+        
+         if let navMapLocationViewController : UINavigationController = self.viewControllers?[0] as? UINavigationController, let navStudentLocationViewController  : UINavigationController = self.viewControllers?[1] as? UINavigationController {
+            
+            self.map = navMapLocationViewController.topViewController as? MapLocationViewController
+            self.std = navStudentLocationViewController.topViewController as? StudentsTableViewController
+            
+            self.map!.udacityService = self.udacityService
+            self.map!.udacityService = self.udacityService
+         }
         
     }
     
     @IBAction func refreshLocations(_ sender: Any) {
-    
+        
         searchAllStudentsLocation()
+    }
+    
+    
+    func populateStudentList(list : NSArray) -> [Student]{
+        
+        var lisfOfStudents : [Student] = []
+        
+        for dictionary  in list {
+            
+            let student = dictionary as! [String : Any]
+            
+            if let latitude = student["latitude"] as? Double, let longitude =  student["longitude"]  as? Double, let first = student["firstName"] as? String, let last = student["lastName"] as? String, let mediaURL = student["mediaURL"]  as? String {
+                
+                let newStudent = Student(firstName: first, lastName: last, latitude: latitude, longitude: longitude, mediaURL: mediaURL, mapString: "")
+                lisfOfStudents.append(newStudent)
+                
+            }
+            
+        }
+        return lisfOfStudents
     }
     
     
     private func searchAllStudentsLocation(){
         
-       
-        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-        
-        let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            if error != nil { // Handle error...
-                return
-            }
+        udacityService.searchAllStudentsLocation(resultHandler: {result,error in
             
-            let parsedResult: [String:AnyObject]!
-            do {
-                parsedResult = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:AnyObject]
-            } catch {
-                print(error)
-                return
-            }
-            
-            if let json : NSArray = parsedResult?["results"] as? NSArray {
+            if let result = result {
                 
-                self.json = json
-               
-                if let navMapLocationViewController : UINavigationController = self.viewControllers?[0] as? UINavigationController, let navStudentLocationViewController  : UINavigationController = self.viewControllers?[1] as? UINavigationController {
+                if let results : NSArray = result["results"] as? NSArray {
                     
-                    let map : MapLocationViewController =  navMapLocationViewController.topViewController as! MapLocationViewController
-                    
-                    let std : StudentsTableViewController =  navStudentLocationViewController.topViewController as! StudentsTableViewController
-                    
-                    map.json = json
-                    std.json = json
+                    self.students = self.populateStudentList(list: results)
+                    self.map!.students = self.students
+                    self.std!.students = self.students
                     performUIUpdatesOnMain {
-                        map.populateMap(json: json)
-                        std.reloadTableView()
+                        self.map!.populateMap(studentsList: self.students!)
+                        self.std!.reloadTableView()
                     }
                     
+                    
+                    
                 }
-                
-                
-                
-            } else{
-                print("Nenhum resultado retornado")
             }
-            
-        }
-        task.resume()
-        
+        })
         
     }
-    
     
 }
 

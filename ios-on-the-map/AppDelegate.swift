@@ -12,10 +12,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
+    var udacityService : UdacityService = UdacityService()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let rooViewController = window?.rootViewController as! LoginViewController
+       
+        
+        rooViewController.udacityService = self.udacityService
+        
+        
         return true
     }
 

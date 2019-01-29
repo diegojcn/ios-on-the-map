@@ -21,11 +21,12 @@ class NewStudentView : UIView {
     
     @IBOutlet weak var locationTxt: UITextField!
     
+    @IBOutlet weak var msgErrorTxt: UILabel!
+    
     @IBOutlet weak var mapView : MKMapView!
     
     var locationCoordinate: CLLocationCoordinate2D?
     
-   
     @objc func hideKeyboard()
     {
         self.nameTxt.resignFirstResponder()

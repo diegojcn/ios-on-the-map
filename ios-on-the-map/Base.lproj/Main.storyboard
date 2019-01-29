@@ -20,6 +20,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FvB-5m-br3" userLabel="LoginView" customClass="LoginView" customModule="ios_on_the_map" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5a-yC-0uo" userLabel="msgErroLbl">
+                                        <rect key="frame" x="8" y="147" width="304" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nog-uF-kqu">
                                         <rect key="frame" x="8" y="155" width="304" height="150"/>
                                         <subviews>
@@ -54,10 +60,15 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="nog-uF-kqu" firstAttribute="centerY" secondItem="FvB-5m-br3" secondAttribute="centerY" id="H1u-mf-9bR"/>
+                                    <constraint firstItem="k5a-yC-0uo" firstAttribute="leading" secondItem="nog-uF-kqu" secondAttribute="leading" id="S8k-7P-AP1"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="k5a-yC-0uo" secondAttribute="trailing" constant="8" id="Uua-VA-udK"/>
                                     <constraint firstAttribute="trailing" secondItem="nog-uF-kqu" secondAttribute="trailing" constant="8" id="Wmf-fT-r8i"/>
                                     <constraint firstItem="nog-uF-kqu" firstAttribute="centerX" secondItem="FvB-5m-br3" secondAttribute="centerX" id="acr-tu-5GS"/>
+                                    <constraint firstItem="k5a-yC-0uo" firstAttribute="width" secondItem="nog-uF-kqu" secondAttribute="width" id="fO4-dp-nfd"/>
+                                    <constraint firstItem="ut5-WA-HMY" firstAttribute="top" secondItem="k5a-yC-0uo" secondAttribute="bottom" constant="8" id="j7I-pM-NMH"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="msgLbl" destination="k5a-yC-0uo" id="q5e-yZ-mqD"/>
                                     <outlet property="passTextField" destination="Oj0-AW-w4g" id="6aV-iC-QwE"/>
                                     <outlet property="userTextField" destination="ut5-WA-HMY" id="nNx-YJ-1O5"/>
                                 </connections>
@@ -79,7 +90,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-287" y="134"/>
+            <point key="canvasLocation" x="-288.75" y="133.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dpy-HH-GRX">
@@ -126,7 +137,7 @@
                     <navigationItem key="navigationItem" title="On the Map" id="zWn-Me-1cR">
                         <barButtonItem key="leftBarButtonItem" image="icon_pin" id="uvN-S4-nRt">
                             <connections>
-                                <segue destination="beg-J3-N2d" kind="show" id="4VW-nI-XKc"/>
+                                <action selector="newLocation:" destination="BgR-fa-hXc" id="xIH-Lg-XZT"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="icon_refresh" id="LCh-7n-2Nn">
@@ -137,6 +148,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="3qj-g9-Qg2" id="zQe-nb-mat"/>
+                        <segue destination="beg-J3-N2d" kind="show" identifier="newLocationSegue" id="qij-fY-C0X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6oa-F4-I2s" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -168,8 +180,23 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="" image="icon_mapview-deselected" selectedImage="icon_listview-selected" id="bc8-K8-dGf"/>
-                    <navigationItem key="navigationItem" title="On the Map" id="7Ox-dQ-aJ6"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="On the Map" id="7Ox-dQ-aJ6">
+                        <barButtonItem key="leftBarButtonItem" image="icon_pin" id="qFK-SR-QD1">
+                            <connections>
+                                <action selector="newLocation:" destination="KrP-bp-f47" id="DCQ-Q5-MpR"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="icon_refresh" id="coJ-Mk-yId">
+                            <connections>
+                                <action selector="refreshLocations:" destination="xnZ-71-a9A" id="WBC-bN-avR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="beg-J3-N2d" kind="show" identifier="newLocationSegue" id="pU7-lU-fq5"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xkg-gl-dRA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -201,56 +228,62 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kk2-M4-Asf" customClass="NewStudentView" customModule="ios_on_the_map" customModuleProvider="target">
-                                <rect key="frame" x="5" y="69" width="310" height="357"/>
+                                <rect key="frame" x="5" y="69" width="310" height="313"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Eo5-Uu-5Ob">
-                                        <rect key="frame" x="0.0" y="0.0" width="310" height="357"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="310" height="313"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKe-uG-vFF" userLabel="msgErroLbl">
+                                                <rect key="frame" x="0.0" y="0.0" width="310" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dkF-P3-yO0" userLabel="stackNameLastName">
-                                                <rect key="frame" x="0.0" y="0.0" width="310" height="20"/>
+                                                <rect key="frame" x="0.0" y="40" width="310" height="30"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N2x-cz-IHR" userLabel="name">
-                                                        <rect key="frame" x="0.0" y="0.0" width="152.5" height="20"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="152.5" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0et-iT-Lwq" userLabel="lastName">
-                                                        <rect key="frame" x="157.5" y="0.0" width="152.5" height="20"/>
+                                                        <rect key="frame" x="157.5" y="0.0" width="152.5" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="qAo-6s-ruW"/>
+                                                    <constraint firstAttribute="height" constant="30" id="qAo-6s-ruW"/>
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0a5-jB-WhF" userLabel="stackWebSiteLink">
-                                                <rect key="frame" x="0.0" y="30" width="310" height="20"/>
+                                                <rect key="frame" x="0.0" y="80" width="310" height="30"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Website link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TkN-6u-OJA" userLabel="webSiteLink">
-                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="20"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="TAP-uF-e2L"/>
+                                                    <constraint firstAttribute="height" constant="30" id="TAP-uF-e2L"/>
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9QJ-EG-geH" userLabel="stackMapLocation">
-                                                <rect key="frame" x="0.0" y="60" width="310" height="20"/>
+                                                <rect key="frame" x="0.0" y="120" width="310" height="30"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eZx-Wi-j87" userLabel="AddressTfd">
-                                                        <rect key="frame" x="0.0" y="0.0" width="265" height="20"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="265" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4Q-uC-CKm" userLabel="searchLocation">
-                                                        <rect key="frame" x="270" y="0.0" width="40" height="20"/>
+                                                        <rect key="frame" x="270" y="0.0" width="40" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="XiX-fE-xac"/>
                                                         </constraints>
@@ -261,17 +294,17 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="fMO-8Z-vtY"/>
+                                                    <constraint firstAttribute="height" constant="30" id="fMO-8Z-vtY"/>
                                                 </constraints>
                                             </stackView>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8Jl-bK-GUu" userLabel="mapView">
-                                                <rect key="frame" x="0.0" y="90" width="310" height="227"/>
+                                                <rect key="frame" x="0.0" y="160" width="310" height="93"/>
                                             </mapView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XHb-TM-q9P">
-                                                <rect key="frame" x="0.0" y="327" width="310" height="30"/>
+                                                <rect key="frame" x="0.0" y="263" width="310" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ea-A0-S19" userLabel="saveBtn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="50"/>
                                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" title="Save">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -282,10 +315,13 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="zqY-Zs-GAs"/>
+                                                    <constraint firstAttribute="height" constant="50" id="zqY-Zs-GAs"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="rKe-uG-vFF" firstAttribute="height" secondItem="dkF-P3-yO0" secondAttribute="height" id="FUS-m6-FCu"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -301,6 +337,7 @@
                                     <outlet property="linkTxt" destination="TkN-6u-OJA" id="daO-xD-BJZ"/>
                                     <outlet property="locationTxt" destination="eZx-Wi-j87" id="RfM-5Y-SAS"/>
                                     <outlet property="mapView" destination="8Jl-bK-GUu" id="1h4-QE-PbF"/>
+                                    <outlet property="msgErrorTxt" destination="rKe-uG-vFF" id="FDU-Ls-cOO"/>
                                     <outlet property="nameTxt" destination="N2x-cz-IHR" id="Tkh-Cn-bdN"/>
                                 </connections>
                             </view>
@@ -353,6 +390,7 @@
         <image name="icon_refresh" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hJs-m1-0pM"/>
+        <segue reference="Dtk-JV-xRU"/>
+        <segue reference="pU7-lU-fq5"/>
     </inferredMetricsTieBreakers>
 </document>

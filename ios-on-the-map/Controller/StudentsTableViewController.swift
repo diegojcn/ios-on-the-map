@@ -11,8 +11,9 @@ import UIKit
 
 class StudentsTableViewController : UITableViewController {
     
-    public var json : NSArray?
+    var students : [Student]!
     
+    var udacityService : UdacityService!
     
     public func reloadTableView(){
         tableView.reloadData()
@@ -22,18 +23,17 @@ class StudentsTableViewController : UITableViewController {
         super.viewDidLoad()
     }
     
+    @IBAction func newLocation(_ sender: Any) {
+        
+        performSegue(withIdentifier: "newLocationSegue", sender: nil)
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell")
-        let student = json?[indexPath.item] as! [String : Any]
+        let student = students[indexPath.row]
         
-        if let first = student["firstName"] as? String,
-            let last = student["lastName"] as? String,
-            let mediaURL = student["mediaURL"]  as? String {
-            
-             cell?.textLabel?.text = "\(first) \(last)"
-            
-        }
+        cell?.textLabel?.text = "\(student.firstName) \(student.lastName)"
         
         return cell!
         
@@ -41,7 +41,21 @@ class StudentsTableViewController : UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-         return json?.count ?? 0
+        return students.count
+    }
+    
+    
+}
+
+extension StudentsTableViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "newLocationSegue" {
+            
+            let newLocationViewController = segue.destination as! NewLocationViewController
+            newLocationViewController.udacityService  = self.udacityService
+            
+        }
     }
     
 }

@@ -14,49 +14,68 @@ class MapLocationViewController : UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    public var json: NSArray!
+    var udacityService : UdacityService!
     
+    var students : [Student]?
     
     override func viewDidLoad() {
         
-      super.viewDidLoad()
+        super.viewDidLoad()
         
-        if let jsonWrap = self.json {
+        if let studentsWraped = self.students {
             
-            populateMap(json: jsonWrap)
+            populateMap(studentsList: studentsWraped)
         }
         
-
     }
     
-    public func populateMap(json: NSArray){
-
-        var annotations = [MKPointAnnotation]()
-
-        for dictionary  in json {
+    @IBAction func newLocation(_ sender: Any) {
+        
+        performSegue(withIdentifier: "newLocationSegue", sender: nil)
+    }
+    
+    public func populateMap(studentsList: [Student]){
+        if self.mapView != nil {
+            var annotations = [MKPointAnnotation]()
             
-            let student = dictionary as! [String : Any]
-            let annotation = MKPointAnnotation()
-            
-            if let latitude = student["latitude"], let longitude =  student["longitude"], let first = student["firstName"] as? String, let last = student["lastName"] as? String, let mediaURL = student["mediaURL"]  as? String{
+            for studentItem  in studentsList {
                 
-                let lat = CLLocationDegrees(student["latitude"] as! Double)
-                let long = CLLocationDegrees(student["longitude"] as! Double)
+                
+                let annotation = MKPointAnnotation()
+                
+                let lat = CLLocationDegrees(studentItem.latitude)
+                let long = CLLocationDegrees(studentItem.longitude)
                 
                 let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            
+                
                 annotation.coordinate = coordinate
-                annotation.title = "\(first) \(last)"
-                annotation.subtitle = mediaURL
-            
+                annotation.title = "\(studentItem.firstName) \(studentItem.lastName)"
+                annotation.subtitle = studentItem.mediaURL
+                
                 annotations.append(annotation)
                 
+                
+                
             }
-           
+            
+            
+            self.mapView.addAnnotations(annotations)
+            
         }
+    }
+    
+}
 
-        self.mapView.addAnnotations(annotations)
-        
+
+extension MapLocationViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "newLocationSegue" {
+            
+            let newLocationViewController = segue.destination as! NewLocationViewController
+            newLocationViewController.udacityService  = self.udacityService
+            
+        }
     }
     
 }

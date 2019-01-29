@@ -12,8 +12,8 @@ class LoginView : UIView {
     
     @IBOutlet weak var userTextField: UITextField!
     
-    
     @IBOutlet weak var passTextField: UITextField!
     
+    @IBOutlet weak var msgLbl: UILabel!
     
 }

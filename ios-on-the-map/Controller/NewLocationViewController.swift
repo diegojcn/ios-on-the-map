@@ -14,8 +14,10 @@ class NewLocationViewController: UIViewController{
     
     @IBOutlet weak var newStudentView: NewStudentView!
     
+    var udacityService : UdacityService!
+    
     override func viewWillAppear(_ animated: Bool) {
-       subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,7 +49,7 @@ class NewLocationViewController: UIViewController{
     
     @IBAction func saveNewLocation(_ sender: UIButton) {
         
-       saveAndPinNewLocation(newStudentView: self.newStudentView)
+        saveAndPinNewLocation(newStudentView: self.newStudentView)
         
         performSegue(withIdentifier: "back", sender: nil)
         
@@ -58,42 +60,42 @@ class NewLocationViewController: UIViewController{
     @IBAction func findInTheMap(_ sender: UIButton) {
         
         let alert = displayLoading(customMessage: "Finding location ...")
-         present(alert, animated: true)
+        present(alert, animated: true)
         
-        var localSearchRequest : MKLocalSearch.Request = MKLocalSearch.Request()
+        let localSearchRequest : MKLocalSearch.Request = MKLocalSearch.Request()
         localSearchRequest.naturalLanguageQuery = newStudentView.locationTxt.text
-        var localSearch : MKLocalSearch = MKLocalSearch(request: localSearchRequest)
+        let localSearch : MKLocalSearch = MKLocalSearch(request: localSearchRequest)
         localSearch.start { (localSearchResponse, error) -> Void in
             
+            self.newStudentView.mapView.removeAnnotations(self.newStudentView.mapView.annotations)
+             self.newStudentView.msgErrorTxt.text = ""
             if localSearchResponse == nil{
-                let alertController = UIAlertController(title: nil, message: "Place Not Found", preferredStyle: UIAlertController.Style.alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
+                self.newStudentView.msgErrorTxt.text = "Location not found!"
+                self.dismiss(animated: true, completion: nil)
                 return
             }
             //3
-            var pointAnnotation : MKPointAnnotation = MKPointAnnotation()
+            let pointAnnotation : MKPointAnnotation = MKPointAnnotation()
             pointAnnotation.title = self.newStudentView.locationTxt.text
             pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse!.boundingRegion.center.latitude, longitude:     localSearchResponse!.boundingRegion.center.longitude)
             self.newStudentView.locationCoordinate = pointAnnotation.coordinate
             
-            var pinAnnotationView : MKPinAnnotationView = MKPinAnnotationView(annotation: pointAnnotation, reuseIdentifier: nil)
+            let pinAnnotationView : MKPinAnnotationView = MKPinAnnotationView(annotation: pointAnnotation, reuseIdentifier: nil)
             self.newStudentView.mapView.centerCoordinate = pointAnnotation.coordinate
-        self.newStudentView.mapView.removeAnnotations(self.newStudentView.mapView.annotations)
-        self.newStudentView.mapView.addAnnotation(pinAnnotationView.annotation!)
+            self.newStudentView.mapView.addAnnotation(pinAnnotationView.annotation!)
             
             performUIUpdatesOnMain {
                 self.dismiss(animated: true, completion: nil)
             }
-           
-
+            
+            
         }
     }
     
     @objc func keyboardChange(_ notification:Notification) {
         
         if(notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification ){
-
+            
             let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self.newStudentView, action: #selector(self.newStudentView.hideKeyboard))
             tapGesture.cancelsTouchesInView = false
             
@@ -104,42 +106,36 @@ class NewLocationViewController: UIViewController{
     
     func saveAndPinNewLocation(newStudentView: NewStudentView){
         
-        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
-        request.httpMethod = "POST"
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        
-        guard let firstName = newStudentView.nameTxt.text, let lastName = newStudentView.lastNameTxt.text, let mapString =  newStudentView.locationTxt.text, let mediaURL = newStudentView.linkTxt.text, let latitude = newStudentView.locationCoordinate?.latitude, let longitude = newStudentView.locationCoordinate?.longitude else{
-            print("Erro")
-            return
-        }
-        let uniqueKey = Int(arc4random_uniform(UInt32(99999)))
-        let body = "{\"uniqueKey\": \"\(uniqueKey)\", \"firstName\": \"\(firstName)\", \"lastName\": \"\(lastName)\", \"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\", \"latitude\": \(latitude), \"longitude\": \(longitude)}"
-        
-        request.httpBody = body.data(using: String.Encoding.utf8)
-    
-        let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            if error != nil { // Handle error…
+        guard let lastName : String = newStudentView.lastNameTxt.text,
+            let firstName : String = newStudentView.nameTxt.text,
+            let mediaURL  : String = newStudentView.linkTxt.text,
+            let mapSgtring  : String = newStudentView.locationTxt.text,
+            let latitude : Double = newStudentView.locationCoordinate?.latitude,
+            let longitude : Double = newStudentView.locationCoordinate?.longitude else {
+                newStudentView.msgErrorTxt.text = "Não foi possivel salvar os dados!"
                 return
-            }
-            print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)
-            
-            let parsedResult: [String:AnyObject]!
-            do {
-                parsedResult = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:AnyObject]
-            } catch {
-                print(error)
-                return
-            }
-            
         }
-        task.resume()
+        newStudentView.msgErrorTxt.text = ""
+        let student : Student = Student(firstName: firstName, lastName: lastName, latitude: latitude, longitude: longitude, mediaURL: mediaURL, mapString: mapSgtring)
         
+        udacityService.saveAndPinNewLocation(student: student, resultHandler: {_,_ in })
+        
+        performSegue(withIdentifier: "back", sender: nil)
     }
     
     
+    
+}
 
+extension NewLocationViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "back" {
+            
+            let controller = segue.destination as! TabBarViewController
+            controller.udacityService  = self.udacityService
+            
+        }
+    }
+    
 }
